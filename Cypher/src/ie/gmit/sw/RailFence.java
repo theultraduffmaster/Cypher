@@ -134,8 +134,41 @@ public class RailFence {
 		String cypher = new String("TTFOHATGRNREEANOETYRCIMHHAKT");
 		String cypher2 = new String("RDGYAERDELIHAIQKSTWRUCEBI");
 		
-		try { // scanner takes in input from the file
-			Scanner scanner = new Scanner(cypherfile);
+		try { 
+			Scanner user_input1 = new Scanner( System.in );
+			String choice;
+			System.out.println("What would you like to do? \n Input: For entering plaintext to be encoded " 
+													+ "\n Story: For an unravelling story read from files");
+			choice = user_input1.next();
+				
+			if(choice.equalsIgnoreCase("Input"))
+			{
+				Scanner I = new Scanner(System.in);
+				
+				WW1Decoder user = new WW1Decoder();
+				System.out.print("Type a message to be encoded: ");
+				String msg = I.nextLine();
+				user.dumpGrid();
+				System.out.println("Message that you wanted to Encode: " + msg);
+				String inputText = new RailFence(). encrypt(msg, 5);
+				System.out.println("   Coded version: " + inputText);
+				String inputText1 = new RailFence(). decrypt(inputText, 5);
+				System.out.println(" Decoded version: " + inputText1);
+			}
+			else if(choice.equalsIgnoreCase("Story"))
+			{
+			File cypherfile1 = new File("Message.txt"); // creates the file object
+			Scanner user_input2 = new Scanner( System.in );
+			String file_name;
+			System.out.println("Enter a File name");
+			file_name = user_input2.next();
+				
+			if(file_name.equals("Message.txt"))
+			{
+				System.out.println("File Name is " + file_name);
+				
+			// scanner takes in input from the file
+			Scanner scanner = new Scanner(cypherfile1);
 			
 			while (scanner.hasNextLine()) {
 				String cypherText = scanner.nextLine();
@@ -145,7 +178,10 @@ public class RailFence {
 				System.out.println(s);
 			}
 			scanner.close();
-		} catch (FileNotFoundException e) {
+		} 
+	}
+}
+			catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
@@ -195,3 +231,4 @@ public class RailFence {
 		}
 	}
 }
+	
